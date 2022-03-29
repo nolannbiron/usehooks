@@ -1,6 +1,6 @@
 import React from "react";
 import { renderHook, act } from "@testing-library/react-hooks";
-import {useSessionStorage} from "../hooks/storage";
+import { useSessionStorage } from "../hooks/storage";
 
 test("should increment counter", () => {
   const { result } = renderHook(() => useSessionStorage("name", "John"));

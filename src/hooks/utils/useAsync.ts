@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 
-export type AsyncStatus = 
-  "pending" |
-  "resolved" |
-  "rejected";
-
+export type AsyncStatus = "pending" | "resolved" | "rejected";
 
 interface useAsyncState<T> {
   value: T | null;
@@ -30,13 +26,15 @@ const useAsync = <T>(
     return asyncFn()
       .then((response: any) => {
         setValue(response);
-        setStatus('resolved');
+        setStatus("resolved");
       })
       .catch((error: any) => {
         setError(error);
-        setStatus('rejected');
+        setStatus("rejected");
       })
-      .finally(() => {setLoading(false)});
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -48,4 +46,4 @@ const useAsync = <T>(
   return { value, loading, error, status, execute };
 };
 
-export {useAsync as default};
+export { useAsync as default };
