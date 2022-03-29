@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 
-export const enum AsyncStatus {
-  Pending,
-  Resolved,
-  Rejected,
-}
+export type AsyncStatus = 
+  "pending" |
+  "resolved" |
+  "rejected";
+
 
 interface useAsyncState<T> {
   value: T | null;
@@ -18,7 +18,7 @@ const useAsync = <T>(
   asyncFn: () => Promise<T>,
   immediate = true
 ): useAsyncState<T> => {
-  const [status, setStatus] = React.useState<AsyncStatus>(AsyncStatus.Pending);
+  const [status, setStatus] = React.useState<AsyncStatus>("pending");
   const [value, setValue] = React.useState<T | null>(null);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<any | null>(null);
@@ -26,16 +26,17 @@ const useAsync = <T>(
   const execute = async () => {
     setLoading(true);
     setError(null);
-    setStatus(AsyncStatus.Pending);
+    setStatus("pending");
     return asyncFn()
       .then((response: any) => {
         setValue(response);
-        setStatus(AsyncStatus.Resolved);
+        setStatus('resolved');
       })
       .catch((error: any) => {
         setError(error);
-        setStatus(AsyncStatus.Rejected);
-      }).finally(() => setLoading(false));
+        setStatus('rejected');
+      })
+      .finally(() => {setLoading(false)});
   };
 
   useEffect(() => {
@@ -47,4 +48,4 @@ const useAsync = <T>(
   return { value, loading, error, status, execute };
 };
 
-export default useAsync;
+export {useAsync as default};

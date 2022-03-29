@@ -1,6 +1,6 @@
 import React from "react";
 import { renderHook, act } from "@testing-library/react-hooks";
-import useLocalStorage from "./useLocalStorage";
+import useLocalStorage from "../hooks/storage/useLocalStorage";
 
 test("should increment counter", () => {
   const { result } = renderHook(() => useLocalStorage("name", "John"));
@@ -9,7 +9,7 @@ test("should increment counter", () => {
     result.current[1]("Jane");
   });
 
-  expect(JSON.parse(localStorage.getItem("name") as string)).toBe("Jane");
+  expect(JSON.parse(localStorage.getItem("name") as any)).toBe("Jane");
 
   // act(() => {
   //   result.current[2]();
