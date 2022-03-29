@@ -26,7 +26,7 @@ const useAsync = <T>(
   const execute = async () => {
     setLoading(true);
     setError(null);
-
+    setStatus(AsyncStatus.Pending);
     return asyncFn()
       .then((response: any) => {
         setValue(response);
@@ -35,7 +35,7 @@ const useAsync = <T>(
       .catch((error: any) => {
         setError(error);
         setStatus(AsyncStatus.Rejected);
-      });
+      }).finally(() => setLoading(false));
   };
 
   useEffect(() => {
