@@ -7,7 +7,7 @@ test("should increment counter", () => {
   const { result } = renderHook(() => useCopyToClipboard());
 
   act(() => {
-    result.current[1]('John')
+    result.current[1]("John");
   });
 
   expect(result.current[0]).toBe("John");
