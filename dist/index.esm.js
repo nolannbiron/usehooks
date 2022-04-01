@@ -484,23 +484,25 @@ function useDebounce(value, delay) {
     return debouncedValue;
 }
 
-const FAST_INTERVAL = 10000;
-const SLOW_INTERVAL = 60000;
+const FAST_INTERVAL = 10000; // 10sec
+const SLOW_INTERVAL = 60000; //1min
 const RefreshContext = createContext({ slow: 0, fast: 0 });
 // This context maintain 2 counters that can be used as a dependencies on other hooks to force a periodic refresh
-const RefreshContextProvider = ({ children, }) => {
+const RefreshContextProvider = ({ children, fastRefresh, slowRefresh }) => {
+    fastRefresh = fastRefresh ? fastRefresh : FAST_INTERVAL;
+    slowRefresh = slowRefresh ? slowRefresh : SLOW_INTERVAL;
     const [slow, setSlow] = useState(0);
     const [fast, setFast] = useState(0);
     useEffect(() => {
         const interval = setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
             setFast((prev) => prev + 1);
-        }), FAST_INTERVAL);
+        }), fastRefresh);
         return () => clearInterval(interval);
     }, []);
     useEffect(() => {
         const interval = setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
             setSlow((prev) => prev + 1);
-        }), SLOW_INTERVAL);
+        }), slowRefresh);
         return () => clearInterval(interval);
     }, []);
     return (React.createElement(RefreshContext.Provider, { value: { slow, fast } }, children));
@@ -512,9 +514,9 @@ const useRefresh = () => {
 };
 
 const UseHooksContext = React.createContext({});
-const UseHooksProvider = ({ children }) => {
+const UseHooksProvider = ({ children, config }) => {
     return (React.createElement(UseHooksContext.Provider, { value: {} },
-        React.createElement(RefreshContextProvider, null, children)));
+        React.createElement(RefreshContextProvider, Object.assign({}, config), children)));
 };
 
 export { useAsync as AsyncStatus, UseHooksContext, UseHooksProvider, useAsync, useBoolean, useCopyToClipboard, useDebounce, useElementSize, useEventListener, useHover, useImageLoader, useInterval, useIsWindowVisible, useLast, useLocalStorage, useLockedBody, useOnClickOutside, usePrevious, useRefresh, useSessionStorage, useTimeSince, useToggle, useUserAgent, useWindowSize };

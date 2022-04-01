@@ -492,23 +492,25 @@ function useDebounce(value, delay) {
     return debouncedValue;
 }
 
-const FAST_INTERVAL = 10000;
-const SLOW_INTERVAL = 60000;
+const FAST_INTERVAL = 10000; // 10sec
+const SLOW_INTERVAL = 60000; //1min
 const RefreshContext = React.createContext({ slow: 0, fast: 0 });
 // This context maintain 2 counters that can be used as a dependencies on other hooks to force a periodic refresh
-const RefreshContextProvider = ({ children, }) => {
+const RefreshContextProvider = ({ children, fastRefresh, slowRefresh }) => {
+    fastRefresh = fastRefresh ? fastRefresh : FAST_INTERVAL;
+    slowRefresh = slowRefresh ? slowRefresh : SLOW_INTERVAL;
     const [slow, setSlow] = React.useState(0);
     const [fast, setFast] = React.useState(0);
     React.useEffect(() => {
         const interval = setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
             setFast((prev) => prev + 1);
-        }), FAST_INTERVAL);
+        }), fastRefresh);
         return () => clearInterval(interval);
     }, []);
     React.useEffect(() => {
         const interval = setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
             setSlow((prev) => prev + 1);
-        }), SLOW_INTERVAL);
+        }), slowRefresh);
         return () => clearInterval(interval);
     }, []);
     return (React__default["default"].createElement(RefreshContext.Provider, { value: { slow, fast } }, children));
@@ -520,9 +522,9 @@ const useRefresh = () => {
 };
 
 const UseHooksContext = React__default["default"].createContext({});
-const UseHooksProvider = ({ children }) => {
+const UseHooksProvider = ({ children, config }) => {
     return (React__default["default"].createElement(UseHooksContext.Provider, { value: {} },
-        React__default["default"].createElement(RefreshContextProvider, null, children)));
+        React__default["default"].createElement(RefreshContextProvider, Object.assign({}, config), children)));
 };
 
 exports.AsyncStatus = useAsync;
