@@ -11,18 +11,18 @@ npm i @nolannbiron/usehooks
 ## 📖 Hooks
 
 <!-- HOOKS:START -->
-### events/
+### events
 - `useEventListener()`
 - `useHover()`
 - `useImageLoader()`
 - `useOnClickOutside()`
 
-### storagee/
+### storage
 - `useLocalStorage()`
 - `useSessionStorage()`
 
 
-### utils/
+### utils
 - `useAsync()`
 - `useBoolean()`
 - `useCopyToClipboard()`
@@ -35,7 +35,7 @@ npm i @nolannbiron/usehooks
 - `useToggle()`
 
 
-### viewport/
+### viewport
 - `useElementSize()`
 - `useIsWindowVisible()`
 - `useLockedBody()`
