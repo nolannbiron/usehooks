@@ -7,5 +7,11 @@ export default {
     { file: pkg.main, format: "cjs" },
     { file: pkg.module, format: "es" },
   ],
-  plugins: [typescript()],
+  plugins: [
+    typescript(),
+  ],
+  external: [
+    'react',
+    "ua-parser-js"
+  ]
 };
