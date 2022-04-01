@@ -1,3 +1,3 @@
 export * from "./events";
-export * from "./sizing";
+export * from "./viewport";
 export * from "./storage";

@@ -1,28 +1,40 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 
-type Copied = string | null;
-type SetCopy = (text: string) => Promise<boolean>;
+type Copied = boolean;
+type SetCopy = (text: string) => void;
 
-const useCopyToClipboard = (): [Copied, SetCopy] => {
-  const [value, setValue] = React.useState<Copied>(null);
+const useCopyToClipboard = (timeout = 1000): [Copied, SetCopy] => {
+  const [isCopied, setIsCopied] = React.useState<Copied>(false);
 
-  const copy: SetCopy = async (text: string) => {
-    if (!navigator?.clipboard) {
-      console.warn("Clipboard not found");
-      return false;
+    const copy: SetCopy = useCallback((text: string) => {
+        if (!navigator?.clipboard) {
+            console.warn("Clipboard not supported");
+            setIsCopied(false);
+            return;
+        }   
+
+        try {
+            navigator.clipboard.writeText(text);
+            setIsCopied(true);
+        } catch (err: any) {
+            setIsCopied(false);            
+        }
+  }, []);
+
+  useEffect(() => {
+    if (isCopied) {
+        const hide = setTimeout(() => {
+            setIsCopied(false)
+        }, timeout)
+
+        return () => {
+            clearTimeout(hide)
+        }
     }
+    return undefined
+  }, [isCopied, setIsCopied, timeout])
 
-    try {
-      navigator.clipboard.writeText(text);
-      setValue(text);
-      return true;
-    } catch (err: any) {
-      setValue(null);
-      return false;
-    }
-  };
-
-  return [value, copy];
+  return [isCopied, copy];
 };
 
 export default useCopyToClipboard;
