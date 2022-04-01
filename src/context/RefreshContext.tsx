@@ -8,7 +8,7 @@ const RefreshContext = createContext({ slow: 0, fast: 0 });
 const RefreshContextProvider = ({
   children,
   fastRefresh,
-  slowRefresh
+  slowRefresh,
 }: {
   children: React.ReactNode;
   fastRefresh?: number;
