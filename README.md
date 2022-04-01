@@ -8,7 +8,6 @@
 npm i @nolannbiron/usehooks
 ```
 
-
 ## 📖 Hooks
 
 <!-- HOOKS:START -->
@@ -18,13 +17,10 @@ npm i @nolannbiron/usehooks
 - `useImageLoader()`
 - `useOnClickOutside()`
 
-<br/>
-
 ### storagee/
 - `useLocalStorage()`
 - `useSessionStorage()`
 
-<br/>
 
 ### utils/
 - `useAsync()`
@@ -38,7 +34,6 @@ npm i @nolannbiron/usehooks
 - `useTimeSincee()`
 - `useToggle()`
 
-<br/>
 
 ### viewport/
 - `useElementSize()`
