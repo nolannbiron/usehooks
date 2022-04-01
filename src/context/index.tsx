@@ -6,7 +6,7 @@ const UseHooksContext = React.createContext({});
 const UseHooksProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <UseHooksContext.Provider value={{}}>
-      <RefreshContextProvider>{children}</RefreshContextProvider>
+      <RefreshContextProvider >{children}</RefreshContextProvider>
     </UseHooksContext.Provider>
   );
 };
