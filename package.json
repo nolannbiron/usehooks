@@ -66,5 +66,21 @@
     "@babel/runtime": "^7.17.8",
     "@testing-library/react-hooks": "^7.0.2",
     "ua-parser-js": "^1.0.2"
-  }
+  },
+  "description": "## Usage",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nolannbiron/usehooks.git"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "ts"
+  ],
+  "author": "nolannbiron",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nolannbiron/usehooks/issues"
+  },
+  "homepage": "https://github.com/nolannbiron/usehooks#readme"
 }

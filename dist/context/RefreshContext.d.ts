@@ -3,7 +3,7 @@ declare const RefreshContext: React.Context<{
     slow: number;
     fast: number;
 }>;
-declare const RefreshContextProvider: ({ children, fastRefresh, slowRefresh }: {
+declare const RefreshContextProvider: ({ children, fastRefresh, slowRefresh, }: {
     children: React.ReactNode;
     fastRefresh?: number | undefined;
     slowRefresh?: number | undefined;

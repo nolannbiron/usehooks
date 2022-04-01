@@ -488,7 +488,7 @@ const FAST_INTERVAL = 10000; // 10sec
 const SLOW_INTERVAL = 60000; //1min
 const RefreshContext = createContext({ slow: 0, fast: 0 });
 // This context maintain 2 counters that can be used as a dependencies on other hooks to force a periodic refresh
-const RefreshContextProvider = ({ children, fastRefresh, slowRefresh }) => {
+const RefreshContextProvider = ({ children, fastRefresh, slowRefresh, }) => {
     fastRefresh = fastRefresh ? fastRefresh : FAST_INTERVAL;
     slowRefresh = slowRefresh ? slowRefresh : SLOW_INTERVAL;
     const [slow, setSlow] = useState(0);
@@ -514,7 +514,7 @@ const useRefresh = () => {
 };
 
 const UseHooksContext = React.createContext({});
-const UseHooksProvider = ({ children, config }) => {
+const UseHooksProvider = ({ children, config, }) => {
     return (React.createElement(UseHooksContext.Provider, { value: {} },
         React.createElement(RefreshContextProvider, Object.assign({}, config), children)));
 };
