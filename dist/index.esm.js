@@ -375,7 +375,7 @@ function timeDifference(date, format, returnType) {
     }
 }
 
-const useCopyToClipboard = (timeout = 1000) => {
+const useCopyToClipboard = (timeout = 5000) => {
     const [isCopied, setIsCopied] = React.useState(false);
     const copy = useCallback((text) => {
         if (!(navigator === null || navigator === void 0 ? void 0 : navigator.clipboard)) {
@@ -383,13 +383,10 @@ const useCopyToClipboard = (timeout = 1000) => {
             setIsCopied(false);
             return;
         }
-        try {
-            navigator.clipboard.writeText(text);
-            setIsCopied(true);
-        }
-        catch (err) {
-            setIsCopied(false);
-        }
+        navigator.clipboard
+            .writeText(text)
+            .then(() => setIsCopied(true))
+            .catch(() => setIsCopied(false));
     }, []);
     useEffect(() => {
         if (isCopied) {
