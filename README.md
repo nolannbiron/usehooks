@@ -1,11 +1,11 @@
-## @nolannbiron/usehooks WIP
+## usehooks WIP
 
 ## Usage
 
 ### install
 
 ```bash
-npm i @nolannbiron/usehooks
+npm i @nolannb/usehooks
 ```
 
 ## 📖 Hooks
