@@ -17,7 +17,5 @@ test("should increment counter", () => {
   });
 
   expect(result.current[0]).toBe(false);
-  expect(window.navigator.clipboard.writeText)
-      .toHaveBeenCalledWith('John');
-
+  expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith("John");
 });

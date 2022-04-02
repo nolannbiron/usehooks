@@ -12,7 +12,10 @@ const useCopyToClipboard = (timeout = 5000): [Copied, SetCopy] => {
       setIsCopied(false);
       return;
     }
-    navigator.clipboard.writeText(text).then(() => setIsCopied(true)).catch(() => setIsCopied(false));
+    navigator.clipboard
+      .writeText(text)
+      .then(() => setIsCopied(true))
+      .catch(() => setIsCopied(false));
   }, []);
 
   useEffect(() => {
