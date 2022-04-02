@@ -6,10 +6,18 @@ import { useCopyToClipboard } from "../hooks/utils";
 test("should increment counter", () => {
   const { result } = renderHook(() => useCopyToClipboard());
 
+  Object.assign(window.navigator, {
+    clipboard: {
+      writeText: jest.fn().mockImplementation(() => Promise.resolve()),
+    },
+  });
+
   act(() => {
     result.current[1]("John");
   });
 
-  expect(result.current[0]).toBe("John");
-  expect(navigator.clipboard.readText()).toBe("John");
+  expect(result.current[0]).toBe(false);
+  expect(window.navigator.clipboard.writeText)
+      .toHaveBeenCalledWith('John');
+
 });

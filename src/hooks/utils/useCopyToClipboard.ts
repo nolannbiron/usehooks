@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from "react";
 type Copied = boolean;
 type SetCopy = (text: string) => void;
 
-const useCopyToClipboard = (timeout = 1000): [Copied, SetCopy] => {
+const useCopyToClipboard = (timeout = 5000): [Copied, SetCopy] => {
   const [isCopied, setIsCopied] = React.useState<Copied>(false);
 
   const copy: SetCopy = useCallback((text: string) => {
@@ -12,13 +12,7 @@ const useCopyToClipboard = (timeout = 1000): [Copied, SetCopy] => {
       setIsCopied(false);
       return;
     }
-
-    try {
-      navigator.clipboard.writeText(text);
-      setIsCopied(true);
-    } catch (err: any) {
-      setIsCopied(false);
-    }
+    navigator.clipboard.writeText(text).then(() => setIsCopied(true)).catch(() => setIsCopied(false));
   }, []);
 
   useEffect(() => {
