@@ -1,7 +1,7 @@
 {
-  "name": "@nolannbiron/usehooks",
-  "version": "0.1.5-0",
-  "private": true,
+  "name": "@bironnolann_/react-usehooks",
+  "version": "0.0.0",
+  "private": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
