@@ -9,3 +9,5 @@ export { default as useLast } from "./useLast";
 export { default as usePrevious } from "./usePrevious";
 export { default as useDebounce } from "./useDebounce";
 export { default as useRefresh } from "./useRefresh";
+export { default as useDelayedUnmount } from "./useDelayedUnmount";
+export { default as useLastUpdated } from "./useLastUpdated";

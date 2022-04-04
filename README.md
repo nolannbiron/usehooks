@@ -27,8 +27,10 @@ npm i @nolannb/usehooks
 - `useBoolean()`
 - `useCopyToClipboard()`
 - `useDebounce()`
+- `useDelayedUnmount()`
 - `useInterval()`
 - `useLast()`
+- `useLastUpdated()`
 - `usePrevious()`
 - `useRefresh()`
 - `useTimeSincee()`

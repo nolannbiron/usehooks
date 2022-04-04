@@ -510,10 +510,48 @@ const useRefresh = () => {
     return { fastRefresh: fast, slowRefresh: slow };
 };
 
+/**
+ * Use this hook when you want to animate something when it appears on the screen (e.g. when some prop set to true)
+ * but when its not on the screen you want it to be fully unmounted and not just hidden or height 0.
+ * This is especially useful when you have a table of 100s rows and each row has expandable element that appears on click.
+ * If you just set the expanding animation while keeping inactive elements mounted all those 100 elements will load the DOM,
+ * and if they all receive updates via props you're looking at 100 DOM updates for hidden elements.
+ * This hook "shows" element immediately when the isMounted is true
+ * but keeps element mounted for delayTime to let unmounting animation happen, after which you unmount element completely.
+ * delayTime should be the same as animation time in most cases.
+ */
+const useDelayedUnmount = (isMounted, delayTime) => {
+    const [shouldRender, setShouldRender] = useState(false);
+    useEffect(() => {
+        let timeoutId;
+        if (isMounted && !shouldRender) {
+            setShouldRender(true);
+        }
+        else if (!isMounted && shouldRender) {
+            timeoutId = setTimeout(() => setShouldRender(false), delayTime);
+        }
+        return () => clearTimeout(timeoutId);
+    }, [isMounted, delayTime, shouldRender]);
+    return shouldRender;
+};
+
+/**
+ * A helper hook to keep track of the time between events
+ * Can also be used to force an effect to re-run
+ */
+const useLastUpdated = () => {
+    const [lastUpdated, setStateLastUpdated] = useState(Date.now());
+    const previousLastUpdated = usePrevious(lastUpdated);
+    const setLastUpdated = useCallback(() => {
+        setStateLastUpdated(Date.now());
+    }, [setStateLastUpdated]);
+    return { lastUpdated, previousLastUpdated, setLastUpdated };
+};
+
 const UseHooksContext = React.createContext({});
 const UseHooksProvider = ({ children, config, }) => {
     return (React.createElement(UseHooksContext.Provider, { value: {} },
         React.createElement(RefreshContextProvider, Object.assign({}, config), children)));
 };
 
-export { useAsync as AsyncStatus, UseHooksContext, UseHooksProvider, useAsync, useBoolean, useCopyToClipboard, useDebounce, useElementSize, useEventListener, useHover, useImageLoader, useInterval, useIsWindowVisible, useLast, useLocalStorage, useLockedBody, useOnClickOutside, usePrevious, useRefresh, useSessionStorage, useTimeSince, useToggle, useUserAgent, useWindowSize };
+export { useAsync as AsyncStatus, UseHooksContext, UseHooksProvider, useAsync, useBoolean, useCopyToClipboard, useDebounce, useDelayedUnmount, useElementSize, useEventListener, useHover, useImageLoader, useInterval, useIsWindowVisible, useLast, useLastUpdated, useLocalStorage, useLockedBody, useOnClickOutside, usePrevious, useRefresh, useSessionStorage, useTimeSince, useToggle, useUserAgent, useWindowSize };
