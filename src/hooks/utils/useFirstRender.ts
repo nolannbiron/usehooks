@@ -1,15 +1,15 @@
-import { useRef } from 'react'
+import { useRef } from "react";
 
 function useFirstRender(): boolean {
-  const first = useRef(true)
+  const first = useRef(true);
 
   if (first.current) {
-    first.current = false
+    first.current = false;
 
-    return true
+    return true;
   }
 
-  return first.current
+  return first.current;
 }
 
-export default useFirstRender
+export default useFirstRender;

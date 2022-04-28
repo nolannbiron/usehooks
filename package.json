@@ -12,7 +12,7 @@
     "build": "rm -rf ./dist && rollup -c && tsc -d --emitDeclarationOnly --declarationDir dist",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build && npm run format",
     "test": "jest",
     "release": "yarn build && np"
   },
