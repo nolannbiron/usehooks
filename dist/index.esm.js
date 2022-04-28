@@ -548,10 +548,19 @@ const useLastUpdated = () => {
     return { lastUpdated, previousLastUpdated, setLastUpdated };
 };
 
+function useFirstRender() {
+    const first = useRef(true);
+    if (first.current) {
+        first.current = false;
+        return true;
+    }
+    return first.current;
+}
+
 const UseHooksContext = React.createContext({});
 const UseHooksProvider = ({ children, config, }) => {
     return (React.createElement(UseHooksContext.Provider, { value: {} },
         React.createElement(RefreshContextProvider, Object.assign({}, config), children)));
 };
 
-export { useAsync as AsyncStatus, UseHooksContext, UseHooksProvider, useAsync, useBoolean, useCopyToClipboard, useDebounce, useDelayedUnmount, useElementSize, useEventListener, useHover, useImageLoader, useInterval, useIsWindowVisible, useLast, useLastUpdated, useLocalStorage, useLockedBody, useOnClickOutside, usePrevious, useRefresh, useSessionStorage, useTimeSince, useToggle, useUserAgent, useWindowSize };
+export { useAsync as AsyncStatus, UseHooksContext, UseHooksProvider, useAsync, useBoolean, useCopyToClipboard, useDebounce, useDelayedUnmount, useElementSize, useEventListener, useFirstRender, useHover, useImageLoader, useInterval, useIsWindowVisible, useLast, useLastUpdated, useLocalStorage, useLockedBody, useOnClickOutside, usePrevious, useRefresh, useSessionStorage, useTimeSince, useToggle, useUserAgent, useWindowSize };

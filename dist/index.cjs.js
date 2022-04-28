@@ -556,6 +556,15 @@ const useLastUpdated = () => {
     return { lastUpdated, previousLastUpdated, setLastUpdated };
 };
 
+function useFirstRender() {
+    const first = React.useRef(true);
+    if (first.current) {
+        first.current = false;
+        return true;
+    }
+    return first.current;
+}
+
 const UseHooksContext = React__default["default"].createContext({});
 const UseHooksProvider = ({ children, config, }) => {
     return (React__default["default"].createElement(UseHooksContext.Provider, { value: {} },
@@ -572,6 +581,7 @@ exports.useDebounce = useDebounce;
 exports.useDelayedUnmount = useDelayedUnmount;
 exports.useElementSize = useElementSize;
 exports.useEventListener = useEventListener;
+exports.useFirstRender = useFirstRender;
 exports.useHover = useHover;
 exports.useImageLoader = useImageLoader;
 exports.useInterval = useInterval;
