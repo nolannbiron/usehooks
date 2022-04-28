@@ -28,6 +28,7 @@ npm i @nolannb/usehooks
 - `useCopyToClipboard()`
 - `useDebounce()`
 - `useDelayedUnmount()`
+- `useFirstRender()`
 - `useInterval()`
 - `useLast()`
 - `useLastUpdated()`
